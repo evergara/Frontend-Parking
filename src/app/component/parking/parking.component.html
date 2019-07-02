@@ -1,0 +1,51 @@
+<button class="btn btn-lg btn-outline-primary" (click)="open(content)">Ingresar vehiculo</button>
+
+<div class="container">
+  <br>
+  <ul class="list-group">
+    <li *ngFor="let item of listParking" class="list-group-item">
+      <b>{{item.licensePlate}}-{{item.vehicleType}}</b> <b *ngIf="item.vehicleType!=='CAR'">{{item.displacement}}</b>
+      <br>
+      <b>Hora entrada: {{item.dateArrival}}</b>
+      <b *ngIf="item.dateDeparture!==null"> - Hora salida: {{item.dateDeparture}}</b>
+      <br>
+      <b>Valor = {{item.value}}</b>
+      <button *ngIf="item.dateDeparture===null" class="btn btn-outline-danger" (click)="registerVehicle(item.licensePlate)" type="button">Salida del vehiculo</button>
+    </li>
+  </ul>
+</div>
+
+
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Profile update</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <form (ngSubmit)="saveRegister()">
+    <div class="modal-body">
+      <div class="form-group">
+        <label for="exampleFormControlInput1">Placa del vehiculo</label>
+        <input required [(ngModel)]="form.licensePlate" type="text" class="form-control" id="placa" name="placa"
+          placeholder="123B">
+      </div>
+      <div class="form-group">
+        <label for="exampleFormControlSelect1">Tipo de vehiculo</label>
+        <select required [(ngModel)]="form.vehicleType" class="form-control" id="tipoVehiculo" name="tipoVehiculo">
+          <option value='MOTORCYCLE'>Moto</option>
+          <option value='CAR'>Carro</option>
+        </select>
+      </div>
+      <div *ngIf="form.vehicleType==='MOTORCYCLE'" class="form-group">
+        <label for="exampleFormControlInput1">Cilindraje</label>
+        <input required [(ngModel)]="form.displacement" type="number" step="10" class="form-control" id="cilindraje"
+          name="cilindraje">
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="submit" class="btn btn-outline-dark">Guardar</button>
+    </div>
+  </form>
+</ng-template>
