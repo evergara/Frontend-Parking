@@ -1,18 +1,46 @@
-<button class="btn btn-lg btn-outline-primary" (click)="open(content)">Ingresar vehiculo</button>
-
 <div class="container">
+  <br/>
+  <div class="row">
+    <div class="col-12">
+      <button id="btn-register" name="btn-register" class="btn btn-lg btn-outline-success float-right"
+        (click)="open(content)">Ingresar vehiculo</button>
+    </div>
+    <div class="col-12">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Buscar por placa" [(ngModel)]="searchLicensePlate" />
+        </div>
+    </div>
+    <div class="col-12">
+      <ul class="list-group">
+        <li *ngFor="let item of listParking | filterBy: ['licensePlate']:searchLicensePlate"
+          class="list-group-item item-notborder">
+          <div class="card">
+            <div class="card-header">
+              <div class="row">
+                <div class="col-sm">Placa: <b>{{item.licensePlate}}</b></div>
+                <div class="col-sm">Tipo de Vehiculo: <span class="badge badge-dark">{{item.vehicleType}}</span></div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-sm">Hora entrada: <b>{{item.dateArrival}}</b></div>
+                <div class="col-sm" *ngIf="item.dateDeparture!==null">Hora salida: <b>{{item.dateDeparture}}</b></div>
+              </div>
+              <div class="row">
+                <div class="col-sm">Valor: <b>{{item.value}}</b></div>
+                <div class="col-sm" *ngIf="item.vehicleType!=='CAR'">Cilindraje: <b>{{item.displacement}}</b></div>
+              </div>
+            </div>
+            <div *ngIf="item.dateDeparture===null" class="card-footer text-muted">
+              <button class="btn btn-outline-danger float-right" (click)="registerVehicle(item.licensePlate)"
+                type="button">Salida del vehiculo</button>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
   <br>
-  <ul class="list-group">
-    <li *ngFor="let item of listParking" class="list-group-item">
-      <b>{{item.licensePlate}}-{{item.vehicleType}}</b> <b *ngIf="item.vehicleType!=='CAR'">{{item.displacement}}</b>
-      <br>
-      <b>Hora entrada: {{item.dateArrival}}</b>
-      <b *ngIf="item.dateDeparture!==null"> - Hora salida: {{item.dateDeparture}}</b>
-      <br>
-      <b>Valor = {{item.value}}</b>
-      <button *ngIf="item.dateDeparture===null" class="btn btn-outline-danger" (click)="registerVehicle(item.licensePlate)" type="button">Salida del vehiculo</button>
-    </li>
-  </ul>
 </div>
 
 
@@ -24,7 +52,7 @@
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
-  <form (ngSubmit)="saveRegister()">
+  <form (ngSubmit)="saveRegister();modal.close();">
     <div class="modal-body">
       <div class="form-group">
         <label for="exampleFormControlInput1">Placa del vehiculo</label>
@@ -44,6 +72,7 @@
           name="cilindraje">
       </div>
     </div>
+
     <div class="modal-footer">
       <button type="submit" class="btn btn-outline-dark">Guardar</button>
     </div>
