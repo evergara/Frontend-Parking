@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { ServiceParkingService } from '../../../service/service-parking/service-parking.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import Swal from 'sweetalert2';
@@ -10,8 +10,8 @@ import { ListParkingComponent } from '../list-parking/list-parking.component';
   styleUrls: ['./register-parking.component.css']
 })
 export class RegisterParkingComponent implements OnInit {
-  @ViewChild(ListParkingComponent, { static: true })
-  list: ListParkingComponent;
+  @Output()
+  getRegister = new EventEmitter<any>();
 
   public form = {
     vehicleType: '',
@@ -42,7 +42,7 @@ export class RegisterParkingComponent implements OnInit {
       this.servicioParking.saveRegister(this.form).subscribe(
         (response: any) => {
           this.resetForm();
-          this.list.getRegister();
+          this.getRegister.emit();
         },
         err => {
           Swal.fire({
@@ -56,9 +56,7 @@ export class RegisterParkingComponent implements OnInit {
     }
   }
 
-  ngOnInit() {
-    this.list.getRegister();
-  }
+  ngOnInit() {}
 
   public resetForm(): any {
     this.form = {

@@ -13,10 +13,13 @@ export class ParkingComponent implements OnInit {
   list: ListParkingComponent;
   public searchLicensePlate: string;
 
-
   constructor() {}
 
   ngOnInit() {
+    this.getRegister();
+  }
+
+  public getRegister(): void {
     this.list.getRegister();
   }
 }
