@@ -1,80 +1,17 @@
 <div class="container">
-  <br/>
+  <br />
   <div class="row">
     <div class="col-12">
-      <button id="btn-register" name="btn-register" class="btn btn-lg btn-outline-success float-right"
-        (click)="open(content)">Ingresar vehiculo</button>
+      <acme-register-parking></acme-register-parking>
     </div>
     <div class="col-12">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="Buscar por placa" [(ngModel)]="searchLicensePlate" />
-        </div>
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="Buscar por placa" [(ngModel)]="searchLicensePlate" />
+      </div>
     </div>
     <div class="col-12">
-      <ul class="list-group">
-        <li *ngFor="let item of listParking | filterBy: ['licensePlate']:searchLicensePlate"
-          class="list-group-item item-notborder">
-          <div class="card">
-            <div class="card-header">
-              <div class="row">
-                <div class="col-sm">Placa: <b>{{item.licensePlate}}</b></div>
-                <div class="col-sm">Tipo de Vehiculo: <span class="badge badge-dark">{{item.vehicleType}}</span></div>
-              </div>
-            </div>
-            <div class="card-body">
-              <div class="row">
-                <div class="col-sm">Hora entrada: <b>{{item.dateArrival}}</b></div>
-                <div class="col-sm" *ngIf="item.dateDeparture!==null">Hora salida: <b>{{item.dateDeparture}}</b></div>
-              </div>
-              <div class="row">
-                <div class="col-sm">Valor: <b>{{item.value}}</b></div>
-                <div class="col-sm" *ngIf="item.vehicleType!=='CAR'">Cilindraje: <b>{{item.displacement}}</b></div>
-              </div>
-            </div>
-            <div *ngIf="item.dateDeparture===null" class="card-footer text-muted">
-              <button class="btn btn-outline-danger float-right" (click)="registerVehicle(item.licensePlate)"
-                type="button">Salida del vehiculo</button>
-            </div>
-          </div>
-        </li>
-      </ul>
+      <acme-list-parking [searchLicensePlate]="searchLicensePlate"></acme-list-parking>
     </div>
   </div>
   <br>
 </div>
-
-
-
-<ng-template #content let-modal>
-  <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Profile update</h4>
-    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <form (ngSubmit)="saveRegister();modal.close();">
-    <div class="modal-body">
-      <div class="form-group">
-        <label for="exampleFormControlInput1">Placa del vehiculo</label>
-        <input required [(ngModel)]="form.licensePlate" type="text" class="form-control" id="placa" name="placa"
-          placeholder="123B">
-      </div>
-      <div class="form-group">
-        <label for="exampleFormControlSelect1">Tipo de vehiculo</label>
-        <select required [(ngModel)]="form.vehicleType" class="form-control" id="tipoVehiculo" name="tipoVehiculo">
-          <option value='MOTORCYCLE'>Moto</option>
-          <option value='CAR'>Carro</option>
-        </select>
-      </div>
-      <div *ngIf="form.vehicleType==='MOTORCYCLE'" class="form-group">
-        <label for="exampleFormControlInput1">Cilindraje</label>
-        <input required [(ngModel)]="form.displacement" type="number" step="10" class="form-control" id="cilindraje"
-          name="cilindraje">
-      </div>
-    </div>
-
-    <div class="modal-footer">
-      <button type="submit" class="btn btn-outline-dark">Guardar</button>
-    </div>
-  </form>
-</ng-template>

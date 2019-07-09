@@ -6,9 +6,10 @@ import { ParkingComponent } from './parking.component';
 import { FormsModule } from '@angular/forms';
 import { NgPipesModule } from 'ngx-pipes';
 import { ListParkingComponent } from './list-parking/list-parking.component';
+import { RegisterParkingComponent } from './register-parking/register-parking.component';
 
 @NgModule({
-  declarations: [ParkingComponent, ListParkingComponent],
+  declarations: [ParkingComponent, ListParkingComponent, RegisterParkingComponent],
   imports: [
     CommonModule,
     FormsModule,

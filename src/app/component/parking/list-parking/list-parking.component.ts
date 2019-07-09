@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { ServiceParkingService } from '../../../service/service-parking/service-parking.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'acme-list-parking',
@@ -6,10 +8,33 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./list-parking.component.css']
 })
 export class ListParkingComponent implements OnInit {
+  public listParking: any;
+  constructor(private servicioParking: ServiceParkingService) {}
 
-  constructor() { }
+  @Input()
+  public searchLicensePlate: string;
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  getRegister() {
+    this.servicioParking.getRegister().subscribe((response: any) => {
+      this.listParking = response;
+    });
   }
 
+  public registerVehicle(placa: string): any {
+    this.servicioParking.updateRegister(placa).subscribe(
+      (response: any) => {
+        this.getRegister();
+      },
+      err => {
+        Swal.fire({
+          title: 'Error!',
+          text: err.message,
+          type: 'error',
+          confirmButtonText: 'Aceptar'
+        });
+      }
+    );
+  }
 }

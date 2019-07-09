@@ -1,1 +1,27 @@
-<p>list-parking works!</p>
+<ul class="list-group">
+  <li *ngFor="let item of listParking | filterBy: ['licensePlate']:searchLicensePlate"
+    class="list-group-item item-notborder">
+    <div class="card">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-sm">Placa: <strong>{{item.licensePlate}}</strong></div>
+          <div class="col-sm">Tipo de Vehiculo: <span class="badge badge-dark">{{item.vehicleType}}</span></div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-sm">Hora entrada: <strong>{{item.dateArrival}}</strong></div>
+          <div class="col-sm" *ngIf="item.dateDeparture!==null">Hora salida: <strong>{{item.dateDeparture}}</strong></div>
+        </div>
+        <div class="row">
+          <div class="col-sm">Valor: <strong>{{item.value}}</strong></div>
+          <div class="col-sm" *ngIf="item.vehicleType!=='CAR'">Cilindraje: <strong>{{item.displacement}}</strong></div>
+        </div>
+      </div>
+      <div *ngIf="item.dateDeparture===null" class="card-footer text-muted">
+        <button class="btn btn-outline-danger float-right" (click)="registerVehicle(item.licensePlate)"
+          type="button">Salida del vehiculo</button>
+      </div>
+    </div>
+  </li>
+</ul>
