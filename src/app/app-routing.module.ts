@@ -5,6 +5,10 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: './component/parking/parking.module#ParkingModule'
+  },
+  {
+    path: '**',
+    redirectTo: 'Home'
   }
 ];
 

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ServiceParkingService } from '../../../service/service-parking/service-parking.service';
 import Swal from 'sweetalert2';
+import { ServiceParkingService } from '../shared/service/service-parking/service-parking.service';
 
 @Component({
   selector: 'acme-list-parking',

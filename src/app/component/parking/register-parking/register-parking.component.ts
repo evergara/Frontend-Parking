@@ -1,8 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { ServiceParkingService } from '../../../service/service-parking/service-parking.service';
+import { ServiceParkingService } from '../shared/service/service-parking/service-parking.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import Swal from 'sweetalert2';
-import { ListParkingComponent } from '../list-parking/list-parking.component';
 
 @Component({
   selector: 'acme-register-parking',

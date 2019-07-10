@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import { ServiceParkingService } from '../../service/service-parking/service-parking.service';
+import { ServiceParkingService } from '../parking/shared/service/service-parking/service-parking.service';
 
 @Component({
   selector: 'acme-bar-parking',

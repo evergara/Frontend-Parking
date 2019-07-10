@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpService } from '../httpParking/httpParking.service';
-import { environment } from './../../../environments/environment';
+import { environment } from '../../../../../../environments/environment';
+
 
 @Injectable({
   providedIn: 'root'
