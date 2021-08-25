@@ -4,7 +4,7 @@
 
 export const environment = {
   production: true,
-  apiUrl: '/parking'
+  apiUrl:'https://app-parking.azurewebsites.net/parking'
 };
 
 /*

@@ -1,11 +1,7 @@
 {
   "/parking": {
-    "target":  {
-      "host": "localhost",
-      "protocol": "http:",
-      "port": 8080
-    },
+    "target":"https:app-parking.azurewebsites.net",
     "secure": false,
-    "logLevel": "debug"
+    "changeOrigin": true
   }
 }
